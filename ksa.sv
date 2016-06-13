@@ -98,7 +98,7 @@ module ksa(
 		.q(rom_q_1)
 	);
 
-	s_memory decrypted_message_1(
+	decrypt_ram decrypted_message_1(
 		.clock(clk),
 		.address(decrypt_address_1),
 		.data(decrypt_data_1),
@@ -144,7 +144,7 @@ module ksa(
 		.q(rom_q_2)
 	);
 
-	s_memory decrypted_message_2(
+	decrypt_ram decrypted_message_2(
 		.clock(clk),
 		.address(decrypt_address_2),
 		.data(decrypt_data_2),
@@ -190,7 +190,7 @@ module ksa(
 		.q(rom_q_3)
 	);
 
-	s_memory decrypted_message_3(
+	decrypt_ram decrypted_message_3(
 		.clock(clk),
 		.address(decrypt_address_3),
 		.data(decrypt_data_3),
@@ -236,7 +236,7 @@ module ksa(
 		.q(rom_q_4)
 	);
 
-	s_memory decrypted_message_4(
+	decrypt_ram decrypted_message_4(
 		.clock(clk),
 		.address(decrypt_address_4),
 		.data(decrypt_data_4),
