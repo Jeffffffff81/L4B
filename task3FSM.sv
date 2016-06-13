@@ -48,7 +48,7 @@ s_address, s_data, s_q, s_wren, rom_address, rom_q, decrypt_address, decrypt_dat
 	//logic for the key:
 	always_ff @(posedge clock) begin
 		if(reset)
-			key <= 24'b0;
+			key <= MIN_KEY;
 		else if (key_inc)
 			key <= key + 1;
 		else
@@ -171,7 +171,7 @@ s_address, s_data, s_q, s_wren, rom_address, rom_q, decrypt_address, decrypt_dat
 			s_idle:            state <= s_initialize;
 			s_initialize:      state <= s_start_setup;
 			s_start_setup:     state <= s_wait_setup;    
-                        s_wait_setup:      state <= (finish_setup)? s_start_scramble : s_wait_setup;
+			s_wait_setup:      state <= (finish_setup)? s_start_scramble : s_wait_setup;
 			s_start_scramble:  state <= s_wait_scramble;
 			s_wait_scramble:   state <= (finish_scramble)? s_start_decode : s_wait_scramble;
 			s_start_decode:    state <= s_wait_decode;

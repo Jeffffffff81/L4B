@@ -14,24 +14,24 @@ module ksa(
 );
 
 	//////////// CLOCK //////////
-	input logic                      CLOCK_50;
+	input                       CLOCK_50;
 
 	//////////// KEY //////////
-	input logic           [3:0]      KEY;
+	input            [3:0]      KEY;
 
 	//////////// SW //////////
-	input logic           [9:0]      SW;
+	input            [9:0]      SW;
 
 	//////////// LED //////////
-	output  logic         [9:0]      LEDR;
+	output           [9:0]      LEDR;
 
 	//////////// SEG7 //////////
-	output   logic        [6:0]      HEX0;
-	output   logic        [6:0]      HEX1;
-	output   logic        [6:0]      HEX2;
-	output   logic        [6:0]      HEX3;
-	output   logic        [6:0]      HEX4;
-	output   logic        [6:0]      HEX5;
+	output           [6:0]      HEX0;
+	output           [6:0]      HEX1;
+	output           [6:0]      HEX2;
+	output           [6:0]      HEX3;
+	output           [6:0]      HEX4;
+	output           [6:0]      HEX5;
 
 	/*
 	 * General wires:
@@ -57,16 +57,16 @@ module ksa(
 			display_key = 24'h00_00_00;
 	end
 	/*
-         * Each of the cores and their wires:
-         * and their memory which they work on
-         */
+	 * Each of the cores and their wires:
+	 * and their memory which they work on
+	 */
 	//*****************CORE 1*****************//
 	wire found_1, not_found_1;
 	wire[23:0] key_1;
 	wire s_wren_1, decrypt_wren_1;
 	wire[7:0] s_data_1, s_q_1, s_address_1, decrypt_data_1, decrypt_q_1, rom_q_1;
 	wire[4:0] decrypt_address_1, rom_address_1;
-	task3FSM core1(
+	task3FSM  #(.MIN_KEY(24'h00_00_00), .MAX_KEY(24'h0F_FF_FF))core1(
 		.clock(clk),
 		.halt(halt),
 		.found(found_1),
@@ -112,7 +112,7 @@ module ksa(
 	wire s_wren_2, decrypt_wren_2;
 	wire[7:0] s_data_2, s_q_2, s_address_2, decrypt_data_2, decrypt_q_2, rom_q_2;
 	wire[4:0] decrypt_address_2, rom_address_2;
-	task3FSM core2(
+	task3FSM #(.MIN_KEY(24'h10_00_00), .MAX_KEY(24'h1F_FF_FF)) core2(
 		.clock(clk),
 		.halt(halt),
 		.found(found_2),
@@ -158,7 +158,7 @@ module ksa(
 	wire s_wren_3, decrypt_wren_3;
 	wire[7:0] s_data_3, s_q_3, s_address_3, decrypt_data_3, decrypt_q_3, rom_q_3;
 	wire[4:0] decrypt_address_3, rom_address_3;
-	task3FSM core3(
+	task3FSM #(.MIN_KEY(24'h20_00_00), .MAX_KEY(24'h2F_FF_FF)) core3(
 		.clock(clk),
 		.halt(halt),
 		.found(found_3),
@@ -204,7 +204,7 @@ module ksa(
 	wire s_wren_4, decrypt_wren_4;
 	wire[7:0] s_data_4, s_q_4, s_address_4, decrypt_data_4, decrypt_q_4, rom_q_4;
 	wire[4:0] decrypt_address_4, rom_address_4;
-	task3FSM core4(
+	task3FSM #(.MIN_KEY(24'h30_00_00), .MAX_KEY(24'h3F_FF_FF)) core4(
 		.clock(clk),
 		.halt(halt),
 		.found(found_4),
