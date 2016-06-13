@@ -38,6 +38,11 @@ module ksa(
 	 */
 	logic clk;
 	assign clk = CLOCK_50;
+	logic halt;
+	assign halt = found_1 || found_2 || found_3 || found_4;
+	assign LEDR[1] = not_found_1 || not_found_2 || not_found_3 || not_found_4;
+	assign LEDR[0] = found_1 || found_2 || found_3 || found_4;
+
 	logic[23:0] display_key;
 	always_comb begin
 		if(found_1)
@@ -51,12 +56,10 @@ module ksa(
 		else
 			display_key = 24'h00_00_00;
 	end
-
 	/*
          * Each of the cores and their wires:
          * and their memory which they work on
          */
-
 	//*****************CORE 1*****************//
 	wire found_1, not_found_1;
 	wire[23:0] key_1;
@@ -65,6 +68,7 @@ module ksa(
 	wire[4:0] decrypt_address_1, rom_address_1;
 	task3FSM core1(
 		.clock(clk),
+		.halt(halt),
 		.found(found_1),
 		.not_found(not_found_1),
 		.display_key(key_1),
@@ -110,6 +114,7 @@ module ksa(
 	wire[4:0] decrypt_address_2, rom_address_2;
 	task3FSM core2(
 		.clock(clk),
+		.halt(halt),
 		.found(found_2),
 		.not_found(not_found_2),
 		.display_key(key_2),
@@ -155,6 +160,7 @@ module ksa(
 	wire[4:0] decrypt_address_3, rom_address_3;
 	task3FSM core3(
 		.clock(clk),
+		.halt(halt),
 		.found(found_3),
 		.not_found(not_found_3),
 		.display_key(key_3),
@@ -200,6 +206,7 @@ module ksa(
 	wire[4:0] decrypt_address_4, rom_address_4;
 	task3FSM core4(
 		.clock(clk),
+		.halt(halt),
 		.found(found_4),
 		.not_found(not_found_4),
 		.display_key(key_4),
@@ -236,12 +243,12 @@ module ksa(
 		.q(decrypt_q_4),
 		.wren(decrypt_wren_4)
 	);
+	//*********************************//
 
 
 	/*
 	 * Seven Segment Displays
-	 */
-	 
+	 */	 
 	 SevenSegmentDisplayDecoder byte_0a(
 		.nIn(display_key[3:0]),
 		.ssOut(HEX0)
@@ -271,6 +278,9 @@ module ksa(
 		.nIn(display_key[23:20]),
 		.ssOut(HEX5)
 	 );
+
+	//***************************************//
+
 	 
 	
 endmodule
