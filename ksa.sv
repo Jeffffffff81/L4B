@@ -3,7 +3,6 @@
 module ksa(
 	CLOCK_50,
 	KEY,
-	SW,
 	LEDR,
 	HEX0,
 	HEX1,
@@ -18,9 +17,6 @@ module ksa(
 
 	//////////// KEY //////////
 	input            [3:0]      KEY;
-
-	//////////// SW //////////
-	input            [9:0]      SW;
 
 	//////////// LED //////////
 	output           [9:0]      LEDR;
@@ -40,12 +36,14 @@ module ksa(
 	assign clk = CLOCK_50;
 	logic halt;
 	assign halt = found_1 || found_2 || found_3 || found_4;
-	assign LEDR[1] = not_found_1 || not_found_2 || not_found_3 || not_found_4;
+	assign LEDR[1] = not_found_1 && not_found_2 && not_found_3 && not_found_4;
 	assign LEDR[0] = found_1 || found_2 || found_3 || found_4;
 
 	logic[23:0] display_key;
 	always_comb begin
-		if(found_1)
+		if(not_found_1 && not_found_2 && not_found_3 && not_found_4)
+			display_key = 24'hFF_FF_FF;
+		else if(found_1)
 			display_key = key_1;
 		else if(found_2)
 			display_key = key_2;
@@ -54,7 +52,7 @@ module ksa(
 		else if(found_4)
 			display_key = key_4;
 		else
-			display_key = 24'h00_00_00;
+			display_key = key_1;
 	end
 	/*
 	 * Each of the cores and their wires:

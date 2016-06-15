@@ -1,3 +1,4 @@
+`default_nettype none
 module checkASCII(start, clock, finish, ram_address, ram_q, valid);
 
 	//inputs to FSM 

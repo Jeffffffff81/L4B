@@ -2,7 +2,8 @@
 
 /*
  * This FSM will decrypt the message stored in ROM, and output it to the decrypted RAM. 
- * It uses a 8x256 working RAM. 
+ * It uses a 8x256 working RAM. It reads from an 8x32 ROM, containing the encrypted 
+ * message. The decrypted output is placed in an 8x32 RAM. 
  *
  * Inputs:   clock: the clock which this FSM runs on.
  *           halt: tells the FSM to stop
