@@ -91,12 +91,12 @@ module task2aFSM(clock, start, finish, secret_key, wren, data, address, q);
 	parameter calc_j        = 14'b0101_0_1_0_0_0_0_0_0_0_0;
 	parameter get_sj_1      = 14'b0110_0_0_0_0_0_0_0_0_0_0;
 	parameter get_sj_2      = 14'b0111_0_0_0_1_0_0_0_0_0_0;
-	parameter write_sj_1	= 14'b1000_0_0_0_0_0_0_0_0_1_0;
-	parameter write_sj_2	= 14'b1001_0_0_0_0_0_0_0_0_1_1;
-	parameter write_si_1	= 14'b1010_0_0_0_0_0_0_0_1_0_0; 
-	parameter write_si_2	= 14'b1011_0_0_0_0_0_0_0_1_0_1; 
+	parameter write_sj_1    = 14'b1000_0_0_0_0_0_0_0_0_1_0;
+	parameter write_sj_2    = 14'b1001_0_0_0_0_0_0_0_0_1_1;
+	parameter write_si_1    = 14'b1010_0_0_0_0_0_0_0_1_0_0; 
+	parameter write_si_2    = 14'b1011_0_0_0_0_0_0_0_1_0_1; 
 	parameter increment_i   = 14'b1100_0_0_0_0_1_0_0_0_0_0; 
-	parameter finished	= 14'b1101_1_0_0_0_0_0_0_0_0_0; 
+	parameter finished      = 14'b1101_1_0_0_0_0_0_0_0_0_0; 
 
 
 	assign wren = state[0];

@@ -58,7 +58,7 @@ module task2bFSM(clock, start, finish, s_q, rom_q, s_wren, decrypt_wren, data, a
 		if (i_reset || finish)
 			i <= 0;
 		else if (enable_i) 
-			i <= (i+1) % 256; //TODO: remove 256
+			i <= (i+1);
 		else
 			i <= i;
 	end
@@ -68,7 +68,7 @@ module task2bFSM(clock, start, finish, s_q, rom_q, s_wren, decrypt_wren, data, a
 		if (j_reset || finish)
 			j <= 0;
 		else if (enable_j) 
-			j <= (j+si) % 256; //TODO: remove 256
+			j <= (j+si);
 		else
 			j <= j;
 	end
