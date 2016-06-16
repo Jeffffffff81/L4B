@@ -125,7 +125,7 @@ s_address, s_data, s_q, s_wren, rom_address, rom_q, decrypt_address, decrypt_dat
 	);
 	
 //state encoding: {state bits},{finish},{found_enable},{not_found_enable},{reset},{key_inc},{start_setup},{start_scramble},{start_decode},{start_check}
-	reg [12:0] state = 13'b0;
+	reg [13:0] state = 14'b0;
 	parameter s_idle           = 14'b00000_0_0_0_0_0_0_0_0;
 	parameter s_initialize     = 14'b00001_0_0_1_0_0_0_0_0;
 	parameter s_start_setup    = 14'b00010_0_0_0_0_1_0_0_0;
