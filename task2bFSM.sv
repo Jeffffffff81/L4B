@@ -146,7 +146,7 @@ module task2bFSM(clock, start, finish, s_q, rom_q, s_wren, decrypt_wren, data, a
 		case(state[5:4]) 
 			2'b00: address = i;
 			2'b01: address = j;
-			2'b10: address = (si + sj) % 256;
+			2'b10: address = (si + sj);
 			2'b11: address = k;
 		endcase
 	end
